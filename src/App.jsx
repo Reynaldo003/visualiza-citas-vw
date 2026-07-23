@@ -1,7 +1,7 @@
 // src/App.jsx
 import { Routes, Route, Navigate } from "react-router-dom";
-import CitasLayout from "./pages/citas/CitasLayout";
-import CitasView from "./pages/citas/CitasView";
+import CitasLayout from "./pages/Citas/CitasLayout";
+import CitasView from "./pages/Citas/CitasView";
 
 function App() {
   return (
