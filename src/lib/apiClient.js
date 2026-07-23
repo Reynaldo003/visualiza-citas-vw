@@ -444,9 +444,8 @@ export async function http(
 
     if (res.status === 401) {
       clearJwtTokens();
-
       if (redirectOnUnauthorized) {
-        redirectToLogin();
+        // redirectToLogin(); // deshabilitado temporalmente en preview de Vercel (dominio distinto al CRM)
       }
     }
 
