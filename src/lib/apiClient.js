@@ -335,6 +335,26 @@ function shouldRedirectOnUnauthorized(path) {
   return !value.includes("/api/public/");
 }
 
+// SimpleJWT manda este `code` cuando el access token expiró o es inválido,
+// pero algunas vistas (cuya clase de autenticación no define
+// `authenticate_header`) hacen que DRF devuelva 403 en vez de 401 para
+// el mismo error. Detectamos ese caso por el `code`/`detail` del cuerpo,
+// sin depender solo del status HTTP.
+function isTokenInvalidResponse(status, data) {
+  if (status === 401) return true;
+
+  if (status !== 403) return false;
+
+  const code = data?.code;
+  const detail = String(data?.detail || "").toLowerCase();
+
+  if (code === "token_not_valid") return true;
+  if (detail.includes("token not valid")) return true;
+  if (detail.includes("token is invalid or expired")) return true;
+
+  return false;
+}
+
 function buildHeaders({ headers = {}, body, auth = true } = {}) {
   const token = auth ? getAccessToken() : "";
 
@@ -400,7 +420,9 @@ export async function http(
 
   const responseData = await parseResponseData(res);
 
-  if (res.status === 401 && auth && retryRefresh) {
+  const tokenInvalid = isTokenInvalidResponse(res.status, responseData);
+
+  if (tokenInvalid && auth && retryRefresh) {
     try {
       await refreshAccessToken();
 
@@ -440,9 +462,9 @@ export async function http(
 
     error.status = res.status;
     error.data = responseData;
-    error.code = res.status === 401 ? "SESSION_EXPIRED" : "API_ERROR";
+    error.code = tokenInvalid ? "SESSION_EXPIRED" : "API_ERROR";
 
-    if (res.status === 401) {
+    if (tokenInvalid) {
       clearJwtTokens();
       if (redirectOnUnauthorized) {
         // redirectToLogin(); // deshabilitado temporalmente en preview de Vercel (dominio distinto al CRM)
