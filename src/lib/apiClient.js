@@ -232,11 +232,13 @@ export function getWebSocketAuthQuery() {
   return `token=${encodeURIComponent(token)}`;
 }
 
-function redirectToLogin() {
-  if (window.location.pathname !== LOGIN_PATH) {
-    window.location.href = LOGIN_PATH;
+if (res.status === 401) {
+    clearJwtTokens();
+
+    // if (redirectOnUnauthorized) {
+    //   redirectToLogin();
+    // }
   }
-}
 
 async function parseResponseData(res) {
   if (res.status === 204) return null;
