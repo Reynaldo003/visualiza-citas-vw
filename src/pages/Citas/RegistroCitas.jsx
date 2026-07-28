@@ -535,8 +535,8 @@ function CalendarioView({ rows, loading, onEdit, onContext, onToggleAsistencia, 
                                     const est = ESTATUS_UI[estKey];
                                     const isUpdating = !!updatingInline[row.id];
 
-                                    return (
-                                        <tr key={row.id} className="hover:bg-slate-50 cursor-pointer" onDoubleClick={() => onEdit(row)}>
+                                   return (
+                                        <tr key={row.id} className="hover:bg-slate-50">
                                             <td className="px-4 py-3 font-bold text-[#131E5C]">{hora}</td>
                                             <td className="px-4 py-3">
                                                 <div className="flex items-center gap-2">
