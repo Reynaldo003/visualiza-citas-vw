@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "VW Head";
+  src: url("./assets/fonts/VWHead-Regular.otf") format("opentype");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VW Text";
+  src: url("./assets/fonts/VWText-Regular.otf") format("opentype");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-vw-header: "VW Head", system-ui, sans-serif;
+  --font-vw-text: "VW Text", system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-vw-text);
+}
