@@ -571,16 +571,7 @@ function CalendarioView({ rows, loading, onEdit, onContext, onToggleAsistencia, 
                                                     {est.label}
                                                 </button>
                                             </td>
-                                            <td className="px-4 py-3">
-                                                <div className="flex items-center justify-end gap-2 text-slate-400">
-                                                    <button onClick={() => onEdit(row)} title="Editar" className="hover:text-[#131E5C]">
-                                                        <CalendarDays className="h-4 w-4" />
-                                                    </button>
-                                                    <button onClick={(e) => onContext(e, row)} title="Más opciones" className="hover:text-[#131E5C]">
-                                                        <MoreVertical className="h-4 w-4" />
-                                                    </button>
-                                                </div>
-                                            </td>
+                                            <td className="px-4 py-3"></td>
                                         </tr>
                                     );
                                 })
@@ -755,14 +746,14 @@ function AgendaView({ rows, loading, onEdit, onNewAtSlot, onToggleAsistencia, up
                                                                 const color = getColor(cita.tipo_cita);
                                                                 const isUpdating = updatingInline?.[cita.id] || false;
                                                                 const nombreCliente = cita?.cliente?.nombre || "—";
-                                                                const telefono = cita?.cliente?.telefono || "—";
+                                                                
                                                                 const autoInteres = cita.auto_interes || "—";
                                                                 const asesorPiso = cita.asesor_piso || "—";
 
                                                                 const asesorDigital = cita.asesor_digital || "—";
 
                                                                 return (
-                                                                    <div key={cita.id} onClick={() => onEdit(cita)} className={`rounded-md p-2 text-left cursor-pointer hover:opacity-90 transition-all ${color.bg} ${color.border} border-l-4 shadow-sm`}>
+                                                                    <div key={cita.id} className={`rounded-md p-2 text-left hover:opacity-90 transition-all ${color.bg} ${color.border} border-l-4 shadow-sm`}>
                                                                         <div className="flex items-center justify-between gap-2 mb-2">
                                                                             <span className="text-xs font-bold text-[#131E5C]">{String(hour).padStart(2, "0")}:{mins}</span>
                                                                             <button
@@ -780,7 +771,7 @@ function AgendaView({ rows, loading, onEdit, onNewAtSlot, onToggleAsistencia, up
                                                                         </div>
                                                                         <div className="text-sm font-extrabold text-[#131E5C] truncate">{nombreCliente}</div>
                                                                         <div className="text-xs font-semibold text-slate-600 truncate">🚗 {autoInteres}</div>
-                                                                        <div className="text-[10px] text-slate-500 truncate flex items-center gap-1 mt-1"><Phone className="h-3 w-3" /> {telefono}</div>
+                                                                        
                                                                         <div className="text-[10px] text-slate-500 truncate mt-1"><span className="font-semibold">Digital:</span> {asesorDigital}</div>
                                                                         <div className="text-[10px] text-slate-500 truncate"><span className="font-semibold">Piso:</span> {asesorPiso}</div>
                                                                         {cita.comentarios && cita.comentarios !== "" && (
