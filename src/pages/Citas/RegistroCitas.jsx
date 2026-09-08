@@ -1152,6 +1152,7 @@ export default function RegistroCitas() {
         "Estefano Marlom De Azcue Aparicio",
         "Blanca Patricia Hernández Hernández",
         "Luis Manuel Hernández Espejo",
+        "Luz Eugenia Hernandez Bustos",
     ];
 
     const FUENTE = ["Facebook", "WhatsApp", "VW-Concesionarios", "Llamada Entrante", "Prospeccion", "Cartera", "Eternizacion de credito", "Remarketing", "Base de Datos", "Ubicacion"];
